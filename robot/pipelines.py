@@ -39,7 +39,9 @@ class MongoPipeline(object):
 
     def process_item(self, item, spider):
         self.db_collection(spider=spider)
-        self.collection.insert_one(dict(item))
+        # 去重插入
+        self.collection.update_one(
+            {'origin_url': item['origin_url']}, {"$set": dict(item)}, upsert=True)
         return item
 
 

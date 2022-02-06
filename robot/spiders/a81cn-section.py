@@ -42,7 +42,6 @@ class A81cnSpider(RobotSpider):
     def parse(self, response, name):
         items = SectionItem()
         base_url = self.get_base_url(response)
-        raise Exception('出现了错误')
 
         items['copyfrom'] = '解放军报'
 
