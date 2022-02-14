@@ -61,7 +61,7 @@ class PaperPeople(RobotSpider):
         items['pdf_url'] = base_url + response.xpath(
             '//div[@class="paper-bot"]/p[@class="right btn"]/a/@href').extract_first()
 
-        items['upload_path'] = 'uploads/' + self.name + '/' + items['date']
+        items['upload_path'] = self.name + '/uploads/' + items['date']
 
         yield items
 

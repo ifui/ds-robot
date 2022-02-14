@@ -100,7 +100,7 @@ class PaperPeople(RobotSpider):
         items['section'] = response.xpath(
             '//div[@class="paper-bot"]/p[@class="left ban"]/text()').extract_first()
 
-        items['upload_path'] = 'uploads/' + self.name + '/' + items['date']
+        items['upload_path'] = self.name + '/uploads/' + items['date']
 
         yield items
 

@@ -95,7 +95,7 @@ class A81cnSpider(RobotSpider):
 
         items['content'] = image_format + items['content']
 
-        items['upload_path'] = 'uploads/' + self.name + '/' + items['date']
+        items['upload_path'] = self.name + '/uploads/' + items['date']
 
         yield items
 

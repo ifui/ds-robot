@@ -133,24 +133,27 @@ ITEM_PIPELINES = {
 JOB_ID = os.getenv("SCRAPY_JOB") or datetime.strftime(
     datetime.now(), '%Y-%m-%d')
 
-# 时间路径
+# 时间路径 eg: 2022/02/14
 DATETIME_PATH = datetime.strftime(datetime.now(), '%Y/%m/%d')
 
+# 附件路径 eg: /public/2022/02/14
+PUBLIC_PATH = os.path.join(env('PUBLIC_PATH'), DATETIME_PATH)
 
-# 附件路径
-PUBLIC_PATH = os.path.join(env('PUBLIC_PATH'), DATETIME_PATH, JOB_ID)
-
-# 打包路径
+# 打包路径 eg: /archives
 ARCHIVE_PATH = env('ARCHIVE_PATH')
 
-IMAGES_STORE = PUBLIC_PATH + '/files'
-FILES_STORE = PUBLIC_PATH + '/files'
+# 图片和文件保存路径 eg: /public/2022/02/14
+IMAGES_STORE = PUBLIC_PATH
+FILES_STORE = PUBLIC_PATH
 
-# 当前时间，例子：2021-09-01 01:02:03
+# 当前时间，eg：2021-09-01 01:02:03
 DATETIME_NOW = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
 
+# JSON 文件名
+FEED_JSON_PATH = PUBLIC_PATH + '/%(name)s/%(name)s_' + JOB_ID + '.json'
+
 FEEDS = {
-    PUBLIC_PATH + '/%(name)s.json': {
+    FEED_JSON_PATH: {
         'format': 'json',
         'encoding': 'utf8',
         'store_empty': False,
@@ -180,5 +183,5 @@ MAIL_PASS = env('MAIL_PASS')
 MAIL_SSL = env.bool('MAIL_SSL')
 MAIL_TLS = env.bool('MAIL_TLS')
 
-# TO_EMAIL = ['ifui@foxmail.com', 'sunxufeng@xxjsbzs.wecom.work']
+# TO_EMAIL = ['ifui@foxmail.com']
 TO_EMAIL = env.list('TO_EMAIL')
